@@ -21,7 +21,7 @@ namespace ConsoleMetterTeste
         //test method ListAllMeterTest created bt mateus castanho
         public void ListAllMeterTest()
         {
-            //put interface controller meter in new mock
+            //put interface IControllerMeter in new mock var
             var mock = new Mock<IControllerMeter>();          
 
 
@@ -64,7 +64,7 @@ namespace ConsoleMetterTeste
         //test method FindBySerialNumber created bt mateus castanho
         public void FindBySerialNumber()
         {
-            //put interface controller meter in new mock
+            //put interface IControllerMeter in new mock var
             var mock = new Mock<IControllerMeter>();
             //iniciates serial var and fill with default values
             string[] serials = { "123", "1234", "1235" };
@@ -124,7 +124,7 @@ namespace ConsoleMetterTeste
         //test method DeleteMeterTest created bt mateus castanho
         public void DeleteMeterTest() 
         {
-            //put interface controller meter in new mock
+            //put interface IControllerMeter in new mock var
             var mock = new Mock<IControllerMeter>();
             //iniciates serial var and fill with default values
             string[] serials = { "123", "1234", "1235" };
@@ -164,7 +164,7 @@ namespace ConsoleMetterTeste
         //test method insertMeterTest created bt mateus castanho
         public void insertMeterTest() 
         {
-            //put interface controller meter in new mock
+            //put interface IControllerMeter in new mock var
             var mock = new Mock<IControllerMeter>();
             //iniciates lis meter and fill with return of GetFakeMeters function     
             List<Meter> meters = GetFakeMeters();
@@ -190,7 +190,7 @@ namespace ConsoleMetterTeste
         //test method insertMeterTest created bt mateus castanho
         public void EditMeterTest()
         {
-            //put interface controller meter in new mock
+            //put interface IControllerMeter in new mock var
             var mock = new Mock<IControllerMeter>();
             //iniciates serial var and fill with default values
             string[] serials = { "123", "1234", "1235" };
@@ -230,7 +230,7 @@ namespace ConsoleMetterTeste
         [TestMethod]
         public void VerifyIfExistBySerialNumber() 
         {
-            //put interface controller meter in new mock
+            //put interface IControllerMeter in new mock var
             var mock = new Mock<IControllerMeter>();
             //iniciates serial var and fill with default value
             var serial = "123";
