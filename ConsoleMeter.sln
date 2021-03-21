@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleMeter", "ConsoleMeter\ConsoleMeter.csproj", "{7A477257-02BA-43F3-937B-8596EDAD1A72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleMeter", "ConsoleMeter\ConsoleMeter.csproj", "{7A477257-02BA-43F3-937B-8596EDAD1A72}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleMetterTeste", "ConsoleMetterTeste\ConsoleMetterTeste.csproj", "{5C7D8FF7-4C86-4FD5-AF42-24D0E40B9BAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{7A477257-02BA-43F3-937B-8596EDAD1A72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A477257-02BA-43F3-937B-8596EDAD1A72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A477257-02BA-43F3-937B-8596EDAD1A72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C7D8FF7-4C86-4FD5-AF42-24D0E40B9BAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C7D8FF7-4C86-4FD5-AF42-24D0E40B9BAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C7D8FF7-4C86-4FD5-AF42-24D0E40B9BAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C7D8FF7-4C86-4FD5-AF42-24D0E40B9BAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

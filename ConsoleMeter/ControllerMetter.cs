@@ -8,11 +8,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleMeter
 {
-    class ControllerMetter : IControllerMetter
+   public class ControllerMeter : IControllerMeter
     {
-        protected List<Metter> metters;
+        
+        private List<Meter> meters;
 
-        protected List<SwitchState> switchStates = new List<SwitchState>()
+
+        //iniciate switch States and fill with default values
+        private List<SwitchState> switchStates = new List<SwitchState>()
         {
             new SwitchState
             {
@@ -30,139 +33,151 @@ namespace ConsoleMeter
                 Description = "Armed"
             }
         };
-
-        protected List<MetterModel> metterModels = new List<MetterModel>() 
+        //iniciate meter models and fill with default values
+        private List<MeterModel> meterModels = new List<MeterModel>() 
         {
-            new MetterModel
+            new MeterModel
             {
                 IdModel = 16,
                 Model = "NSX1P2W"
             },
-            new MetterModel
+            new MeterModel
             {
                 IdModel = 17,
                 Model = "NSX1P3W"
             },
-            new MetterModel
+            new MeterModel
             {
                 IdModel = 18,
                 Model = "NSX2P3W"
             },
-            new MetterModel
+            new MeterModel
             {
                 IdModel = 19,
                 Model = "NSX3P4W"
             }
-        };
+        };  
 
-        public ControllerMetter() 
+        public ControllerMeter() 
         {
-            //When construct is called iniciates a new list metter;
-            metters = new List<Metter>();        
+            //When construct is called iniciates a new list meter;
+            meters = new List<Meter>();        
         }
 
-
-        public bool DeleteMetter(string serialNumber)
+        //DeleteMeter function create by mateus castanho
+        public bool DeleteMeter(string serialNumber)
         {
+            //iniciates try delete meter
             try
             {
-                this.metters.RemoveAll((x) => x.SerialNumber == serialNumber);
+                //trys remove from list a meter with serial informed in function paramenter
+                this.meters.RemoveAll((x) => x.SerialNumber == serialNumber);
+                //return true
                 return true;
             }
             catch (Exception ex) 
             {
+                //if fail in delete meter inform user the erro
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("ERROR: " + ex.Message);
                 Console.ForegroundColor = ConsoleColor.White;
-
+                //return false
                 return false;
             }
         }
 
-        public bool EditMetter(string serialNumber, int switchState)
+        //EditMeter function create by mateus castanho
+        public bool EditMeter(string serialNumber, int switchState)
         {
             try 
             {        
-                this.metters.Single(c => c.SerialNumber == serialNumber).SwitchState = switchState;                                
+                //find a mater with serial number informed in parameter and replace switch state with the switch state informed in parameter
+                this.meters.Single(c => c.SerialNumber == serialNumber).SwitchState = switchState;
+                //return true
                 return true;
             } catch(Exception ex) 
             {
+                //if fail in edit meter inform user the erro
                 Console.ForegroundColor = ConsoleColor.Red;            
                 Console.WriteLine("ERROR: " + ex.Message);
                 Console.ForegroundColor = ConsoleColor.White;
-
+                //return false
                 return false;
             }
         }
 
+        //FindBySerialNumber function create by mateus castanho
         public void FindBySerialNumber(string serialNumber)
         {
+            //stars try
             try
             {
-                var metters =
-                from Metter in this.metters
-                join MetterModel in this.metterModels on Metter.ModelId equals MetterModel.IdModel
-                join SwitchState in this.switchStates on Metter.SwitchState equals SwitchState.State
-                where Metter.SerialNumber == serialNumber
+
+               //try found in list metter the meter with sertial number informed into parameter
+                var meters =
+                from Meter in this.meters
+                //join with meter model where mettermodel.id equals meter.modelid
+                join MeterModel in this.meterModels on Meter.ModelId equals MeterModel.IdModel
+                //join with switch state where Meter.SwitchState equals SwitchState.State
+                join SwitchState in this.switchStates on Meter.SwitchState equals SwitchState.State
+                where Meter.SerialNumber == serialNumber
+                //create new varibles in result and fill with returned query info
                 select new
-                {
-                    SerialNumber = Metter.SerialNumber,
-                    Model = MetterModel.Model,
-                    Number = Metter.Number,
-                    FirmwareVersion = Metter.FirmwareVersion,
+                {                    
+                    SerialNumber = Meter.SerialNumber,
+                    Model = MeterModel.Model,
+                    Number = Meter.Number,
+                    FirmwareVersion = Meter.FirmwareVersion,
                     State = SwitchState.Description
                 };
 
-                if (metters.Count() > 0)
+                //verify if return a meter
+                if (meters.Count() > 0)
                 {
+                    //inform user that found a meter
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("------- Found Metter With Serial: " + serialNumber + " -------");
+                    Console.WriteLine("------- Found Meter With Serial: " + serialNumber + " -------");
                     Console.ForegroundColor = ConsoleColor.White;
-                    foreach (var metter in metters)
+                    foreach (var meter in meters)
                     {
+                        //infor user meter info
                         Console.WriteLine("Serial Number: {0} , Model: {1}, Number: {2}, Firmware Version: {3}, State: {4}"
-                            , metter.SerialNumber, metter.Model, metter.Number, metter.FirmwareVersion, metter.State);
+                            , meter.SerialNumber, meter.Model, meter.Number, meter.FirmwareVersion, meter.State);
                     }
                 }
                 else
                 {
+                    //infor user that dont have any meter with serial number informed
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("------- Error Not Found Metter With Serial: " + serialNumber + " -------");
+                    Console.WriteLine("------- Error Not Found Meter With Serial: " + serialNumber + " -------");
                     Console.ForegroundColor = ConsoleColor.White;
                 }
             }
             catch (Exception ex)
             {
+                //if fail in execute function inform user the error
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("ERROR: " + ex.Message);
                 Console.ForegroundColor = ConsoleColor.White;
             }
         }
 
-
-        public bool InsertMetter(Metter metter)
+        //InsertMeter function create by mateus castanho
+        public bool InsertMeter(Meter meter)
         {
+            //inciate try
             try
-            {
-                bool existSerial = VerifyIfExistBySerialNumber(metter.SerialNumber);
-                if (existSerial == false)
-                {
-                    metters.Add(metter);
-                    return true;
-                }
-                else 
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Fail in insert serial number already registered");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    return false;
-                }
-
+            {         
+               //add to meter list meter object inform into fuction parameters
+               meters.Add(meter);
+                //return true
+               return true;       
             }
             catch (Exception ex) 
             {
+                //if fail in execute function inform user the error
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("ERROR: "+ex.Message);
                 Console.ForegroundColor = ConsoleColor.White;           
@@ -170,55 +185,72 @@ namespace ConsoleMeter
             }
         }
 
-        public bool ListAllMetter()
+        //ListAllMeter metter function create by mateus castanho
+        public bool ListAllMeter()
         {
+            //iniciates try
             try
             {
-                var metters =
-                    from Metter in this.metters
-                    join MetterModel in this.metterModels on Metter.ModelId equals MetterModel.IdModel
-                    join SwitchState in this.switchStates on Metter.SwitchState equals SwitchState.State
+
+                //query all meter in meter list 
+                var meters =
+                    from Meter in this.meters
+                    //join with meter model where mettermodel.id equals meter.modelid
+                    join MeterModel in this.meterModels on Meter.ModelId equals MeterModel.IdModel
+                    //join with switch state where Meter.SwitchState equals SwitchState.State
+                    join SwitchState in this.switchStates on Meter.SwitchState equals SwitchState.State
+                    //create new varibles in result and fill with returned query info
                     select new
                     {
-                        SerialNumber = Metter.SerialNumber,
-                        Model = MetterModel.Model,
-                        Number = Metter.Number,
-                        FirmwareVersion = Metter.FirmwareVersion,
+                        SerialNumber = Meter.SerialNumber,
+                        Model = MeterModel.Model,
+                        Number = Meter.Number,
+                        FirmwareVersion = Meter.FirmwareVersion,
                         State = SwitchState.Description
                     };
 
-                foreach (var metter in metters)
+                //inciates a loop for each meter found in metter list
+                foreach (var meter in meters)
                 {
+                    //inform user meter info
                     Console.WriteLine("Serial Number: {0} , Model: {1}, Number: {2}, Firmware Version: {3}, State: {4}"
-                        , metter.SerialNumber, metter.Model, metter.Number, metter.FirmwareVersion, metter.State);
+                        , meter.SerialNumber, meter.Model, meter.Number, meter.FirmwareVersion, meter.State);
                 }
-
+                //return true
                 return true;
 
             }
             catch (Exception ex)
             {
+                //if fail in execute function inform user the error
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("ERROR: " + ex.Message);
                 Console.ForegroundColor = ConsoleColor.White;
+                //return false
                 return false;
             }
         }
 
+        //VerifyIfExistBySerialNumber function create by mateus castanho
         public bool VerifyIfExistBySerialNumber(String serialNumber)
         {
+            //iniciates try
             try
             {              
-                var metters = this.metters.Where(x => x.SerialNumber == serialNumber);
-
-                if (metters.Count() > 0)
+                //try find in meter list a meter with serial number informed into function paramater
+                var meters = this.meters.Where(x => x.SerialNumber == serialNumber);
+                //verify if found a meter with serial number informed
+                if (meters.Count() > 0)
                 {
+                    //return true
                     return true;
                 }                
+                //return fals
                 return false;
             }
             catch (Exception ex)
-            {                
+            {
+                //if fail in execute function throw a erro to menu;
                 throw new Exception(ex.Message);
             }
         }

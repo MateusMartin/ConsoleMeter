@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ConsoleMeter.Clas
 {
-    public class Metter
+    //Meter class created by mateus castanho 03-19-2020
+    public class Meter
     {
         public string SerialNumber { get; set; }
         public int ModelId { get; set; }
@@ -14,9 +15,11 @@ namespace ConsoleMeter.Clas
         public string FirmwareVersion { get; set; }
         public int SwitchState { get; set; }
 
-        public Metter() { }
+        //empty constructer
+        public Meter() { }
 
-        public Metter(string SerialNumber,int ModelId, int Number, string FirmwareVersion, int SwitchState) 
+        //constructer with parameters fill all the variables with value
+        public Meter(string SerialNumber,int ModelId, int Number, string FirmwareVersion, int SwitchState) 
         {
             this.SerialNumber = SerialNumber;
             this.ModelId = ModelId;

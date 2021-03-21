@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 namespace ConsoleMeter.Interface
 {
-    interface IControllerMetter
+    //controller interface created by mateus castanho 03-19-2020
+    public interface IControllerMeter
     {
 
-        Boolean InsertMetter(Metter metter);
-        Boolean EditMetter(String serialNumber, int switchState);
-        Boolean DeleteMetter(String serialNumber);
+        Boolean InsertMeter(Meter meter);
+        Boolean EditMeter(String serialNumber, int switchState);
+        Boolean DeleteMeter(String serialNumber);
         void FindBySerialNumber(String serialNumber);
-        Boolean ListAllMetter();
+        Boolean ListAllMeter();
         Boolean VerifyIfExistBySerialNumber(String serialNumber);
 
 

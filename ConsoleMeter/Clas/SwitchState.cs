@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleMeter.Clas
 {
-    class SwitchState
+    public class SwitchState
     {
         public int State;
         public string Description;

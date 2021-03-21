@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleMeter.Clas
+
+namespace ConsoleMetterTests
 {
-    class MetterModel
+    
+    class ControllerMetterTests
     {
-        public int IdModel { get; set;}
-        public String Model { get; set; }
-
-
     }
 }
