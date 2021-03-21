@@ -11,7 +11,7 @@ using System.Linq;
 namespace ConsoleMetterTeste
 {
 
-    //unit tests class controller meter test create by mateus castanho
+    //unit tests class meter test create by mateus castanho
     [TestClass]
     public class ControllerMeterTests
     {
